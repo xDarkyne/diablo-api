@@ -16,7 +16,13 @@ export class ItemController {
 
     public static async getItem(req: Request, res: Response) {
         let slug = req.params["item"];
-        let config = await RequestBuilder.getRequest("item", slug);
+        let locale = req.params["locale"];
+        let config = await RequestBuilder.getRequest({
+            endpoint: "item",
+            region: "eu",
+            slug: slug,
+            locale: locale,
+        });
         let data = await this.fetchItem(config);
     
         res.json(data);

@@ -3,5 +3,6 @@ export interface Base {
     name: string,
     path: string,
     icon?: string,
-    slug?: string
+    slug?: string,
+    url?: string
 }

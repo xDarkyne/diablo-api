@@ -1,16 +1,23 @@
+import { AxiosRequestConfig } from 'axios';
 import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { RequestBuilder } from '../helpers/RequestBuilder.helper';
-import { ItemType } from '../models';
+import { ItemType, Base } from '../models';
+import config from '../config/config';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
+const ItemTypeCache = new CacheContainer(new MemoryStorage());
 
 export class ItemTypeController {
 
     @Cache(ItemTypeIndexCache, { ttl: 3600 })
-    private static async fetchItemTypeIndex(): Promise<ItemType[]> {
-        let config = await RequestBuilder.getRequest("itemTypeIndex");
+    private static async fetchItemTypeIndex(locale: string = config.DEFAULT_LOCALE): Promise<ItemType[]> {
+        let config = await RequestBuilder.getRequest({
+            endpoint: "itemTypeIndex",
+            region: "eu",
+            locale: locale,
+        });
         let data = await RequestBuilder.makeRequest<ItemType[]>(config);
 
         await Promise.all(data.map(async(type: ItemType) => {
@@ -21,15 +28,33 @@ export class ItemTypeController {
     }
     
     public static getItemTypeIndex = async(req: Request, res: Response) => {
-        let data = await this.fetchItemTypeIndex();
+        let data = await this.fetchItemTypeIndex(req.params["locale"]);
 
         res.json(data);
     }
 
+    @Cache(ItemTypeCache, { ttl: 3600 })
+    private static async fetchItemType(slug: string, locale: string = config.DEFAULT_LOCALE): Promise<Base[]> {
+        let config = await RequestBuilder.getRequest({
+            endpoint: "itemTypeIndex",
+            region: "eu",
+            slug: slug,
+            locale: locale
+        });
+        let data = await RequestBuilder.makeRequest<Base[]>(config);
+
+        await Promise.all(data.map(async(item: Base) => {
+            item.url = RequestBuilder.getUrl("item", item.path.split("/")[1]);
+        }));
+
+        return data;
+    }
+
     public static async getItemType(req: Request, res: Response) {
         let slug = req.params["type"];
-        let config = await RequestBuilder.getRequest("itemTypeIndex", slug);
-        let data = await RequestBuilder.makeRequest<any>(config);
+        let locale = req.params["locale"];
+        let data = await this.fetchItemType(slug, locale);
+        
 
         res.json(data);
     }

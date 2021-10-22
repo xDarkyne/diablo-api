@@ -2,7 +2,8 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { Cache, CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { stringify } from "querystring";
-import Config from '../config/config';
+import config from '../config/config';
+import { RequestConfig } from "../models/requestConfig.model";
 
 export interface Points {
     item: string,
@@ -32,15 +33,15 @@ export class RequestBuilder {
 
     @Cache(tokenCache, { ttl: 15 })
     private static async getAccessToken(): Promise<string> {
-        if (Config.CLIENT_ID === "" || Config.CLIENT_SECRET === "") throw "Could not recieve access token.";
+        if (config.CLIENT_ID === "" || config.CLIENT_SECRET === "") throw "Could not recieve access token.";
 
         let requestData: AxiosRequestConfig = {
             url: "/oauth/token",
             method: "POST",
             baseURL: "https://eu.battle.net",
             auth: {
-                username: Config.CLIENT_ID,
-                password: Config.CLIENT_SECRET
+                username: config.CLIENT_ID,
+                password: config.CLIENT_SECRET
             },
             data: stringify({"grant_type": "client_credentials"})
         };
@@ -56,15 +57,31 @@ export class RequestBuilder {
         return token;
     }
 
-    public static async getRequest(endpoint: keyof Points, slug: string = "", region: keyof Regions = "eu"): Promise<AxiosRequestConfig> {
+    /**
+     * This is for testing purposes and might be removed later.
+     * 
+     * @param endpoint 
+     * @param slug 
+     * @param region 
+     * @returns 
+     */
+    public static getUrl(endpoint: string, slug: string = ""): string {
+        return `http://localhost:${config.PORT}/${endpoint}/${slug}`;
+    }
+
+    public static async getRequest(requestParams: RequestConfig): Promise<AxiosRequestConfig> {
         let token = await this.getAccessToken();
-        let url = this.Endpoints[endpoint] + slug;
+        let url = this.Endpoints[requestParams.endpoint] + requestParams.slug;
 
         const requestConfig: AxiosRequestConfig = {
             url: url,
-            baseURL: this.Urls[region],
+            baseURL: this.Urls[requestParams.region],
+            method: requestParams.method || "GET",
             headers: {
                 "Authorization": `bearer ${token}`
+            },
+            params: {
+                "locale": requestParams.locale || config.DEFAULT_LOCALE
             }
         };
 
