@@ -1,18 +1,8 @@
 import { AxiosBasicCredentials, Method } from "axios";
-
-export interface Points {
-    item: string,
-    itemTypeIndex: string,
-    seasonIndex: string
-}
-
-export interface Regions {
-    eu: string,
-    us: string
-}
+import { Endpoints, Regions } from "../types";
 
 export interface RequestConfig {
-    endpoint: keyof Points,
+    endpoint: keyof Endpoints,
     region: keyof Regions,
     method?: Method,
     data?: Object,

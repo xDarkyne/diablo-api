@@ -5,6 +5,8 @@ import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { RequestBuilder } from '../helpers/RequestBuilder.helper';
 import { ItemType, Base } from '../models';
 import config from '../config/config';
+import { StorageHelper } from '../helpers';
+import { Categories } from '../types';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
 const ItemTypeCache = new CacheContainer(new MemoryStorage());
@@ -53,7 +55,16 @@ export class ItemTypeController {
     public static async getItemType(req: Request, res: Response) {
         let slug = req.params["type"];
         let locale = req.params["locale"];
-        let data = await this.fetchItemType(slug, locale);
+
+        let data = [] as any[];
+        if (StorageHelper.Categories[slug as keyof Categories]) {
+            await Promise.all(StorageHelper.Categories[slug as keyof Categories].map(async(slug) => {
+                let d = await this.fetchItemType(slug, locale);
+                await Promise.all(d.map(async(item) => {
+                    data.push(item);
+                }));
+            }));
+        } else data = await this.fetchItemType(slug, locale);
         
 
         res.json(data);

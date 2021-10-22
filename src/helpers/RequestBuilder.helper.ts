@@ -3,29 +3,18 @@ import { Cache, CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { stringify } from "querystring";
 import config from '../config/config';
-import { RequestConfig } from "../models/requestConfig.model";
-
-export interface Points {
-    item: string,
-    itemTypeIndex: string,
-    seasonIndex: string
-}
-
-export interface Regions {
-    eu: string,
-    us: string
-}
+import { RequestConfig, Regions, Endpoints } from "../models";
 
 const tokenCache = new CacheContainer(new MemoryStorage());
 
 export class RequestBuilder {
 
-    private static Urls: Record<string, string> = {
+    private static Urls: Record<keyof Regions, string> = {
         eu: "https://eu.api.blizzard.com/",
         us: "https://us.api.blizzard.com/"
     }
 
-    private  static Endpoints: Record<keyof Points, string> = {
+    private  static Endpoints: Record<keyof Endpoints, string> = {
         seasonIndex: "data/d3/season/",
         itemTypeIndex: "d3/data/item-type/",
         item: "d3/data/item/"
