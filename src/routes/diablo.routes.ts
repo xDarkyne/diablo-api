@@ -1,15 +1,11 @@
-import { Router, Response, Request, NextFunction } from 'express';
+import { Router, Response, Request } from 'express';
 import { ItemTypeController, ItemController } from '../controllers';
 
 const DiabloRouter = Router();
 
-DiabloRouter.get('/hello', (req: Request, res: Response,) => {
-    res.send("<p>Hello World</p>");
-});
+DiabloRouter.get('/:locale/item-types', (req: Request, res: Response) => ItemTypeController.getItemTypeIndex(req, res));
+DiabloRouter.get('/:locale/item-types/:type', (req: Request, res: Response) => ItemTypeController.getItemType(req, res));
 
-DiabloRouter.get('/item-types', (req, res) => ItemTypeController.getItemTypeIndex(req, res));
-DiabloRouter.get('/item-types/:type', (req, res) => ItemTypeController.getItemType(req, res));
-
-DiabloRouter.get('/item/:item', (req, res) => ItemController.getItem(req, res));
+DiabloRouter.get('/:locale/item/:item', (req: Request, res: Response) => ItemController.getItem(req, res));
 
 export = DiabloRouter;

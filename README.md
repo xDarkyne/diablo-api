@@ -19,13 +19,13 @@ This is my take on writing a TypeScript wrapper for Blizzards Diablo3 API with c
 
 ## Covered Endpoints
 
-### - `/item-types`
+### - `/:locale/item-types`
 returns all item types
 
-### - `/item-types/:type`
+### - `/:locale/item-types/:type`
 returns all items by slug `type`
 
-### - `/item/:item`
+### - `/:locale/item/:item`
 returns detailed information about an item by given item-slug and item-id
 
 <a name="todo"></a>
@@ -58,7 +58,8 @@ returns detailed information about an item by given item-slug and item-id
 - - [ ] get EraIndex
 - - [ ] get Era 
 - - [ ] get Era Leaderboard
-- [ ] allow localization
+- [ ] group categories like bootsmonk, bootsnecromancer, etc
+- [x] allow localization
 - [ ] make api more resilient against errors
 - [ ] write detailed documentation for api
 
