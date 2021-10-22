@@ -3,6 +3,6 @@ import DiabloRouter from './diablo.routes'
 
 const Routes = Router();
 
-Routes.use("/api/v1", DiabloRouter)
+Routes.use(DiabloRouter)
 
 export = Routes;
