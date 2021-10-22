@@ -71,7 +71,8 @@ export class RequestBuilder {
 
     public static async getRequest(requestParams: RequestConfig): Promise<AxiosRequestConfig> {
         let token = await this.getAccessToken();
-        let url = this.Endpoints[requestParams.endpoint] + requestParams.slug;
+        let slug = requestParams.slug || "";
+        let url = this.Endpoints[requestParams.endpoint] + slug;
 
         const requestConfig: AxiosRequestConfig = {
             url: url,
