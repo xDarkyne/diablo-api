@@ -55,8 +55,8 @@ export class RequestBuilder {
    * @param region 
    * @returns 
    */
-  public static getUrl(endpoint: string, slug: string = ""): string {
-    return `http://localhost:${config.PORT}/${endpoint}/${slug}`;
+  public static getUrl(endpoint: string, slug: string = "", locale: string = config.DEFAULT_LOCALE): string {
+    return `${config.URL}/${locale}/${endpoint}/${slug}`;
   }
 
   public static async getRequest(requestParams: RequestConfig): Promise<AxiosRequestConfig> {

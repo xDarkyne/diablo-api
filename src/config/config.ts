@@ -6,6 +6,7 @@ class Config{
   public CLIENT_ID: string;
   public CLIENT_SECRET: string;
   public DEFAULT_LOCALE: string;
+  public URL: string;
 
   constructor() {
     dotenv.config();
@@ -15,6 +16,7 @@ class Config{
     this.CLIENT_ID = String(process.env.CLIENT_ID) || "";
     this.CLIENT_SECRET = String(process.env.CLIENT_SECRET) || "";
     this.DEFAULT_LOCALE = String(process.env.DEFAULT_LOCALE) || "en_US";
+    this.URL = String(process.env.URL) || `http://localhost:${this.PORT}`;
   }
 }
 
