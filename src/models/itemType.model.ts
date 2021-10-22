@@ -5,5 +5,5 @@ import { Base } from ".";
  * if not used
  */
 export interface ItemType extends Base {
-
+  
 }

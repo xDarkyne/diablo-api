@@ -1,4 +1,4 @@
 export type Regions = {
-    eu: string,
-    us: string
+  eu: string,
+  us: string
 }

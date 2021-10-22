@@ -1,5 +1,5 @@
 export type Categories = {
-    boots: string,
-    head: string,
-    chest: string
+  boots: string,
+  head: string,
+  chest: string
 }
