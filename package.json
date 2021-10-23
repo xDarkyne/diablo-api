@@ -1,10 +1,13 @@
 {
-  "name": "battle-api",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "diablo-api",
+  "version": "0.1.0",
+  "main": "./build/index.js",
   "license": "MIT",
+  "repository": "https://github.com/xdarkyne/diablo-api",
+  "author": "xDarkyne",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "axios": "^0.21.4",

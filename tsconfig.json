@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "experimentalDecorators": true,
-        "outDir": "./build",
-        "esModuleInterop": true,
-        "strict": true,
-    },
-    "exclude": [
-        "./frontend/*"
-    ]
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "strict": true,
+  },
+  "exclude": [
+    "./frontend/*"
+  ]
 }
