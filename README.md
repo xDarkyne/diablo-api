@@ -66,6 +66,7 @@ custom endpoint returning grouped results for item-types like `bootsnecromancer`
 - - [x] Armor
 - - [ ] Weapons
 - - [ ] Other
+- [ ] create devops workflows
 - [ ] implement support for multiple regions
 - [x] allow localization
 - [ ] make api more resilient against errors
