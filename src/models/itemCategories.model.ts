@@ -1,0 +1,33 @@
+export interface ItemCategories {
+  boots: string,
+  head: string,
+  chest: string,
+  gloves: string,
+  shoulders: string,
+  bracers: string,
+  legs: string,
+  waist: string,
+  jewelry: string,
+  offhand: string,
+  follower: string,
+}
+
+export interface ItemTypes extends ItemCategories {
+  cloak: string,
+  wizardHat: string,
+  voodoMask: string,
+  spiritStone: string,
+  belt: string,
+  mightyBelt: string,
+  necklace: string,
+  ring: string,
+  shield: string,
+  crusaderShield: string,
+  mojo: string,
+  orb: string,
+  quiver: string,
+  phylactery: string,
+  enchantressFocus: string,
+  scoundrelToken: string,
+  templarRelict: string,
+}

@@ -7,4 +7,9 @@ export type HeroClasses = {
   necromancer: string,
   witchDoctor: string,
   wizard: string
+
+  // non playable
+  enchantress: string,
+  scoundrel: string
+  templar: string,
 }

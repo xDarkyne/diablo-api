@@ -6,6 +6,7 @@
 - [ Description ](#description)
 - [ Endpoints ](#endpoints)
 - [ Todo ](#todo)
+- [ Used Technologies](#technologies)
 - [ Api ](#blizzard)
 
 <a name="description"></a>
@@ -27,6 +28,9 @@ returns all items by slug `type`
 
 ### - `/:locale/item/:item`
 returns detailed information about an item by given item-slug and item-id
+
+### - `/:locale/v1/item-types/:slug`
+custom endpoint returning grouped results for item-types like `bootsnecromancer`, `bootscrusader` and `boots` under one single endpoint called `boots`.
 
 <a name="todo"></a>
 
@@ -59,9 +63,21 @@ returns detailed information about an item by given item-slug and item-id
 - - [ ] get Era 
 - - [ ] get Era Leaderboard
 - [ ] group categories like bootsmonk, bootsnecromancer, etc
+- - [x] Armor
+- - [ ] Weapons
+- - [ ] Other
+- [ ] implement support for multiple regions
 - [x] allow localization
 - [ ] make api more resilient against errors
 - [ ] write detailed documentation for api
+- [ ] refactor, refactor, refactor
+- [ ] write selfhosting guide
+
+<a name="technologies"></a>
+
+## Used technologies
+- [Express](https://expressjs.com/de/)
+- [TypeScript](https://www.typescriptlang.org/) 
 
 <a name="blizzard"></a>
 
