@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
-import { RequestBuilder } from '../helpers/RequestBuilder.helper';
 import { ItemType, ItemCategories } from '../models';
 import config from '../config/config';
-import { StorageHelper } from '../helpers';
-import { ErrorHandler } from '../helpers/ErrorHandler.helper';
+import { StorageHelper, ErrorHandler, RequestBuilder } from '../helpers';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
 const ItemTypeCache = new CacheContainer(new MemoryStorage());
