@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
-import { ItemType, ItemCategories } from '../models';
-import config from '../config/config';
+import { ItemType, ItemCategories, Item } from '../models';
 import { StorageHelper, ErrorHandler, RequestBuilder } from '../helpers';
+import config from '../config/config';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
 const ItemTypeCache = new CacheContainer(new MemoryStorage());
@@ -97,6 +97,30 @@ export class ItemTypeController {
   }
 
   /**
+   * 
+   * @param slug 
+   * @param locale 
+   * @returns 
+   */
+  private static async fetchGroupedItemType(slug: keyof ItemCategories, locale: string): Promise<ItemType[]> {
+    try {
+      let data = [] as ItemType[];
+      await Promise.all(StorageHelper.Categories[slug].map(async(category) => {
+        let slugData = await this.fetchItemType(category.slug, locale);
+        await Promise.all(slugData.map(async(item: ItemType) => {
+          item.type = category.type;
+          item.class = category.class;
+          data.push(item);
+        }));
+      }));
+
+      return data;
+    } catch(error: any) {
+      throw "Something terrible happened";
+    }
+  }
+
+  /**
    *  GET | Runs multiple requests, constructing a combined
    * array of items of the given slug.
    * 
@@ -115,14 +139,35 @@ export class ItemTypeController {
     }
 
     try {
+      let data = await this.fetchGroupedItemType(slug, locale);
+      res.json(data);
+    } catch(error: any) {
+      console.error(error);
+      ErrorHandler.Handle(req, res, "Something terrible happened :c");
+    }
+  }
+  
+  /**
+   * 
+   * @param req 
+   * @param res 
+   */
+  public static async getAllItemTypes(req: Request, res: Response) {
+    let locale = req.params["locale"];
+
+    try {
+      let categories = [] as string[];
+      for (const category in StorageHelper.Categories) {
+        categories.push(category);
+      }
+
       let data = [] as ItemType[];
-      await Promise.all(StorageHelper.Categories[slug].map(async(category) => {
-        let slugData = await this.fetchItemType(category.slug, locale);
-        await Promise.all(slugData.map(async(item: ItemType) => {
-          item.type = category.type;
-          item.class = category.class;
-          data.push(item);
-        }));
+      await Promise.all(categories.map(async(item: string) => {
+        let slug = item as keyof ItemCategories;
+        let subData = await this.fetchGroupedItemType(slug, locale);
+        subData.map((itemType: ItemType) => {
+          data.push(itemType);
+        });
       }));
 
       res.json(data);
