@@ -1,3 +1,6 @@
+/**
+ * General Item Categories for item type endpoints
+ */
 export interface ItemCategories {
   head: string,
   shoulders: string,
@@ -12,6 +15,9 @@ export interface ItemCategories {
   follower: string,
 }
 
+/**
+ * More detailed item categories like cloaks or mojos.
+ */
 export interface ExtendedItemCategories extends ItemCategories {
   // DemonHunter
   cloak: string,

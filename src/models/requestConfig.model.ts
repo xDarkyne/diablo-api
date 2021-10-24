@@ -1,6 +1,10 @@
 import { AxiosBasicCredentials, Method } from "axios";
 import { Endpoints } from "../types";
 
+/**
+ * custom RequestConfig used in RequestBuilder
+ * helper class for avoiding redundancy in requests.
+ */
 export interface RequestConfig {
   endpoint: keyof Endpoints,
   region: string,

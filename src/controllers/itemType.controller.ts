@@ -97,6 +97,8 @@ export class ItemTypeController {
   }
 
   /**
+   * Fetches all items in a category by slug defined in the StorageHelper 
+   * (src/helpers/StorageHelper.helpers.ts).
    * 
    * @param slug 
    * @param locale 
@@ -149,6 +151,9 @@ export class ItemTypeController {
   }
   
   /**
+   * GET | Endpoint to get a list of all items.
+   * Currently this does not provide all items since this function
+   * uses the StorageHelper which isn't complete yet.
    * 
    * @param req 
    * @param res 

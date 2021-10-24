@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 /**
- * implement proper error handler later.
+ * Maybe think about actually handleing errors later on...
  */
 export abstract class ErrorHandler {
   public static async Handle(req: Request, res: Response, errorMessage: string, statusCode: number = 500) {

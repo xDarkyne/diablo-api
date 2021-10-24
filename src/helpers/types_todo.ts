@@ -1,4 +1,8 @@
 /*
+
+slugs from blizzards item type API that are
+currently not grouped properly.
+
 slug	"hyperionspear"
 slug	"fistweapon"
 slug	"craftingreagent"

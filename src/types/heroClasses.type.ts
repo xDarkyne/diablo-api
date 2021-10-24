@@ -1,3 +1,6 @@
+/**
+ * List of class keys including followers.
+ */
 export type HeroClasses = {
   all: string,
   barbarian: string,

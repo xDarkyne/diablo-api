@@ -1,8 +1,7 @@
 import { Base } from ".";
 
 /**
- * Note: this interface might be redundant and might be removed in the future
- * if not used
+ * Interface used for typing item-type endpoints
  */
 export interface ItemType extends Base {
   origin?: string;
