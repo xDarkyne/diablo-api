@@ -3,4 +3,4 @@ export { ItemType } from "./itemType.model";
 export { Item } from "./item.model";
 export { RequestConfig } from "./requestConfig.model";
 export { HeroClass } from "./class.model";
-export { ItemCategories, ItemTypes } from "./itemCategories.model";
+export { ItemCategories, ExtendedItemCategories } from "./itemCategories.model";

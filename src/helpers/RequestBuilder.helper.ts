@@ -3,7 +3,7 @@ import { Cache, CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { stringify } from "querystring";
 import { RequestConfig } from "../models";
-import { Regions, Endpoints } from "../types";
+import { Endpoints } from "../types";
 import config from '../config/config';
 
 const tokenCache = new CacheContainer(new MemoryStorage());
@@ -15,9 +15,9 @@ export class RequestBuilder {
    * 
    * MULTIPLE REGIONS ARE NOT YET SUPPORTED
    */
-  private static Urls: Record<keyof Regions, string> = {
-    eu: "https://eu.api.blizzard.com/",
-    us: "https://us.api.blizzard.com/"
+  private static Urls: Record<string, string> = {
+    "eu": "https://eu.api.blizzard.com/",
+    "us": "https://us.api.blizzard.com/"
   }
 
   /**
@@ -70,8 +70,8 @@ export class RequestBuilder {
    * @param region 
    * @returns 
    */
-  public static getUrl(endpoint: string, slug: string = "", locale: string = config.DEFAULT_LOCALE): string {
-    return `${config.URL}/${locale}/${endpoint}/${slug}`;
+  public static getUrl(endpoint: string, slug: string = "", locale: string = config.DEFAULT_LOCALE, region: string = config.DEFAULT_REGION): string {
+    return `${config.URL}/${region}/${locale}/${endpoint}/${slug}`;
   }
 
   /**

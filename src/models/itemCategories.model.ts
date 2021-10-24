@@ -1,32 +1,49 @@
 export interface ItemCategories {
-  boots: string,
   head: string,
-  chest: string,
-  gloves: string,
   shoulders: string,
+  chest: string,
   bracers: string,
-  legs: string,
+  gloves: string,
   waist: string,
+  legs: string,
+  boots: string,
   jewelry: string,
   offhand: string,
   follower: string,
 }
 
-export interface ItemTypes extends ItemCategories {
+export interface ExtendedItemCategories extends ItemCategories {
+  // DemonHunter
   cloak: string,
+  quiver: string,
+
+  // Wizard
   wizardHat: string,
+  orb: string,
+
+  // WitchDoctor
   voodoMask: string,
+
+  // Crusader
+  crusaderShield: string,
+
+  // Monk
   spiritStone: string,
-  belt: string,
+  mojo: string,
+
+  // Necromancer
+  phylactery: string,
+
+  // Barbarian
   mightyBelt: string,
+  
+  // All
+  belt: string,
   necklace: string,
   ring: string,
   shield: string,
-  crusaderShield: string,
-  mojo: string,
-  orb: string,
-  quiver: string,
-  phylactery: string,
+
+  // Follower
   enchantressFocus: string,
   scoundrelToken: string,
   templarRelict: string,

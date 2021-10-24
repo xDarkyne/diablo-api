@@ -1,5 +1,5 @@
 import { HeroClasses } from "../types/";
-import { ItemCategories, ItemTypes } from "../models";
+import { ItemCategories, ExtendedItemCategories } from "../models";
 
 /**
  * Simple helper interface to structure
@@ -7,7 +7,7 @@ import { ItemCategories, ItemTypes } from "../models";
  */
 export interface ItemTypeCategory {
   slug: string,
-  type: keyof ItemTypes,
+  type: keyof ExtendedItemCategories,
   class: string,
 }
 

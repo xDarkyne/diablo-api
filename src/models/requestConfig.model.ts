@@ -1,9 +1,9 @@
 import { AxiosBasicCredentials, Method } from "axios";
-import { Endpoints, Regions } from "../types";
+import { Endpoints } from "../types";
 
 export interface RequestConfig {
   endpoint: keyof Endpoints,
-  region: keyof Regions,
+  region: string,
   method?: Method,
   data?: Object,
   locale?: string,

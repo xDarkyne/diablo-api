@@ -5,6 +5,7 @@ import { Base } from ".";
  * if not used
  */
 export interface ItemType extends Base {
+  origin?: string;
   class?: string;
   type?: string;
 }

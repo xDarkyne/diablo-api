@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { RequestBuilder } from '../helpers/RequestBuilder.helper';
+import Config from '../config/config';
 
 const ItemCache = new CacheContainer(new MemoryStorage());
 
@@ -17,9 +18,11 @@ export class ItemController {
     public static async getItem(req: Request, res: Response) {
       let slug = req.params["item"];
       let locale = req.params["locale"];
+      let region = req.params["region"] || Config.DEFAULT_REGION;
+
       let config = await RequestBuilder.getRequest({
         endpoint: "item",
-        region: "eu",
+        region: region,
         slug: slug,
         locale: locale,
       });
