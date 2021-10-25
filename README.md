@@ -108,15 +108,15 @@ You can find your locale [here](https://saimana.com/list-of-country-locale-code/
 - - [ ] get EraIndex
 - - [ ] get Era
 - - [ ] get Era Leaderboard
-- [ ] group categories like bootsmonk, bootsnecromancer, etc
-- - [x] Armor
-- - [ ] Weapons
-- - [ ] Other
 - ### CUSTOM
 - - [x] get all items\*
 - - [ ] get list of custom item-types
 - - [ ] search item
 - - [ ] search item by property
+- [ ] group categories like bootsmonk, bootsnecromancer, etc
+- - [x] Armor
+- - [ ] Weapons
+- - [ ] Other
 - [ ] create devops workflows
 - [x] implement support for multiple regions
 - [x] allow localization
