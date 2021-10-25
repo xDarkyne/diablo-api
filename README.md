@@ -137,7 +137,7 @@ All locales _should_ work, though only de_DE and en_US are actively being tested
 - [x] implement support for multiple regions
 - [x] implement support for oauth in multiple regions
 - [x] allow localization
-- [ ] make api more resilient against errors
+- [x] make api more resilient against errors
 - [ ] write detailed documentation for api
 - [ ] refactor, refactor, refactor
 - [ ] write selfhosting guide

@@ -5,6 +5,6 @@ import { Request, Response } from "express";
  */
 export abstract class ErrorHandler {
   public static async Handle(req: Request, res: Response, errorMessage: string, statusCode: number = 500) {
-    res.status(statusCode).send(errorMessage);
+    res.status(statusCode).send(`Error ${statusCode}: ${errorMessage}`);
   }
 } 

@@ -39,7 +39,8 @@ export abstract class CustomItemTypesController {
       
       return data;
     } catch(error: any) {
-      throw "Something terrible happened";
+      let url = URLHandler.getEndpointUrl(Endpoints.cGroupedItemTypeIndex, "", locale, region);
+      throw `Could not get information for group "${slug}". Try <a href="${url}">this endpoint</a> for an index of available item types.`;
     }
   }
   
@@ -84,7 +85,7 @@ export abstract class CustomItemTypesController {
       let slug = req.params["type"] as ItemTypes;
       let locale = req.params["locale"];
   
-      if (!StorageHelper.Categories[slug]) throw "Invalid slug provided";
+      //if (!StorageHelper.Categories[slug]) throw "Invalid slug provided.";
 
       let data = await this.fetchGroupedItemType(slug, locale);
       res.json(data);

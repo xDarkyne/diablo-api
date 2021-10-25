@@ -31,7 +31,7 @@ export class ItemController {
       data.iconLargeURL = URLHandler.getMediaURL("items", "large", data.icon!);
       return data;
     } catch(error: any) {
-      throw "Something terrible happened";
+      throw `Could not get information for item ${slug}.`;
     }
   }
 

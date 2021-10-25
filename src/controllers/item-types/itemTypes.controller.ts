@@ -34,7 +34,7 @@ export class ItemTypesController {
   
       return data;
     } catch(error) {
-      throw error;
+      throw "Could not retrieve index of item types. This is probably an issue on our side, sorry.";
     }
   }
     
@@ -80,7 +80,8 @@ export class ItemTypesController {
   
       return data;
     } catch(error: any) {
-      throw "Invalid slug provided";
+      let url = URLHandler.getEndpointUrl(Endpoints.cItemTypeIndex, "", locale, region);
+      throw `Could not get information for item type "${slug}". Try <a href="${url}">this endpoint</a> for a list of all item types.`;
     }
   }
 
