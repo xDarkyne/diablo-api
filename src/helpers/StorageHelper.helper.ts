@@ -107,6 +107,9 @@ export abstract class StorageHelper {
       { slug: "enchantressspecial", type: ItemTypes.enchantressFocus, class: Classes.enchantress },
       { slug: "scoundrelspecial", type: ItemTypes.scoundrelToken, class: Classes.scoundrel },
       { slug: "templarspecial", type: ItemTypes.templarRelict, class: Classes.templar },
+    ],
+    weapon: [
+      
     ]
   }
 }

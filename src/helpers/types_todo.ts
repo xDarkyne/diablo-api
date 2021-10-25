@@ -3,68 +3,91 @@
 slugs from blizzards item type API that are
 currently not grouped properly.
 
-slug	"hyperionspear"
+==== ONE HANDED ====
+slug	"axe"
+slug	"dagger"
+slug	"mace"
+slug	"spear"
+slug	"sword"
+slug	"ceremonialdagger"
 slug	"fistweapon"
-slug	"craftingreagent"
-slug	"healthpotion"
-slug	"ancientblade"
-slug	"craftingplanlegendarysmith"
-slug	"combatstaff"
-slug	"ballista"
-slug	"craftingplansmith"
-slug	"colossusblade"
-slug	"mightyweapon1h"
-slug	"mightyweapon2h"
-slug	"generalutility"
 slug	"flail1h"
-slug	"flail2h"
-slug	"crossbow"
-slug	"sword2h"
+slug	"mightyweapon1h"
+slug	"scythe1h"
+
+==== TWO HANDED ====
+slug	"axe2h"
+slug	"mace2h"
 slug	"polearm"
-slug	"portaldevice"
-slug	"archonstaff"
+slug	"staff"
+slug	"sword2h"
+slug	"combatstaff" // DAIBO
+slug	"flail2h"
+slug	"mightyweapon2h"
+slug	"scythe2h"
+
+==== RANGED ====
+slug	"bow"
+slug	"crossbow"
+slug	"handxbow"
+slug	"wand"
+
+==== ETHERIALS ====
+slug	"flail"
+slug	"ballista"
+slug	"boneknife"
+slug	"repeatingcrossbow"
+slug	"scythe"
 slug	"battlecestus"
 slug	"cinquedeas"
-slug	"dagger"
-slug	"mysteryweapon1h"
-slug	"mysteryweapon2h"
-slug	"ceremonialdagger"
+slug	"hyperionspear"
+slug	"ancientblade"
+slug	"colossusblade"
+slug	"archonstaff"
 slug	"legendspike"
-slug	"trainingtome"
-slug	"axe"
-slug	"bow"
-slug	"dye"
-slug	"gem"
-slug	"gold"
-slug	"mace"
-slug	"wand"
-slug	"mace2h"
-slug	"axe2h"
-slug	"flail"
-slug	"quest"
-slug	"shard"
-slug	"spear"
-slug	"staff"
-slug	"sword"
-slug	"scythe1h"
-slug	"scythe2h"
-slug	"boneknife"
-slug	"scroll"
-slug	"scythe"
-slug	"craftingplanjeweler"
 slug	"championsword"
 slug	"swirlingcrystal"
 slug	"mightyscepter"
-slug	"handxbow"
 slug	"greatertalons"
-slug	"repeatingcrossbow"
-slug	"craftingplanmystictransmog"
 slug	"hydrabow"
-slug	"greatershard"
 slug	"wristsword"
 slug	"gravewand"	
-slug	"upgradeablejewel"
 slug	"flyingaxe"
-slug	"scrollbuff"
 slug	"caduceus"
+
+=== MYSTERY WEAPONS ====
+slug	"mysteryweapon1h"
+slug	"mysteryweapon2h"
+
+==== CONSUMABLES ====
+slug	"healthpotion"
+slug	"generalutility"
+
+==== CRAFTING ====
+slug	"craftingreagent"
+slug	"craftingplanlegendarysmith"
+slug	"craftingplansmith"
+slug	"craftingplanjeweler"
+slug	"craftingplanmystictransmog"
+slug	"trainingtome"
+
+==== DYE ====
+slug	"dye"
+
+==== DYE ====
+slug	"gem"
+slug	"upgradeablejewel"
+
+==== OTHER ====
+slug	"portaldevice"
+slug	"gold"
+slug	"scroll"
+slug	"scrollbuff"
+
+==== QUEST ====
+slug	"quest"
+
+???? UNKNOWN ????
+slug	"shard"
+slug	"greatershard"
 */

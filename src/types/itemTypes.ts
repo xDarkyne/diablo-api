@@ -13,6 +13,11 @@
   jewelry = "jewelry",
   offhand = "offhand",
   follower = "follower",
+  weapon = "weapon",
+
+  oneHanded = "one-handed",
+  twoHanded = "two-handed",
+  ranged = "ranged",
 
   // extended
   cloak = "cloak",
