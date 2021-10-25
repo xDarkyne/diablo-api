@@ -15,6 +15,7 @@
   follower = "follower",
   weapon = "weapon",
 
+  // weapon categories
   oneHanded = "one-handed",
   twoHanded = "two-handed",
   ranged = "ranged",
@@ -50,7 +51,14 @@
   shield = "shield",
 
   // Follower
-  enchantressFocus = "",
-  scoundrelToken = "",
-  templarRelict = "",
+  enchantressFocus = "enchantress-focus",
+  scoundrelToken = "scoundrel-token",
+  templarRelict = "templar-relict",
+
+  // crafting
+  craftingReagent = "crafting-reagent",
+  craftingPlan = "crafting-plan",
+  trainingTome = "training-tome",
+
+  etherial = "etherial",
 }

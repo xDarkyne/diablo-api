@@ -109,7 +109,37 @@ export abstract class StorageHelper {
       { slug: "templarspecial", type: ItemTypes.templarRelict, class: Classes.templar },
     ],
     weapon: [
-      
+      // one handed
+      { slug: "axe", type: ItemTypes.oneHanded, class: Classes.all },
+      { slug: "dagger", type: ItemTypes.oneHanded, class: Classes.all },
+      { slug: "mace", type: ItemTypes.oneHanded, class: Classes.all },
+      { slug: "spear", type: ItemTypes.oneHanded, class: Classes.all },
+      { slug: "sword", type: ItemTypes.oneHanded, class: Classes.all },
+      { slug: "mightyweapon1h", type: ItemTypes.oneHanded, class: Classes.barbarian },
+      { slug: "flail1h", type: ItemTypes.oneHanded, class: Classes.crusader },
+      { slug: "fistweapon", type: ItemTypes.oneHanded, class: Classes.monk },
+      { slug: "ceremonialdagger", type: ItemTypes.oneHanded, class: Classes.witchDoctor },
+      { slug: "scythe1h", type: ItemTypes.oneHanded, class: Classes.necromancer},
+
+      // two handed
+      { slug:	"axe2h", type: ItemTypes.twoHanded, class: Classes.all },
+      { slug:	"mace2h", type: ItemTypes.twoHanded, class: Classes.all },
+      { slug:	"polearm", type: ItemTypes.twoHanded, class: Classes.all },
+      { slug:	"staff", type: ItemTypes.twoHanded, class: Classes.all },
+      { slug:	"sword2h", type: ItemTypes.twoHanded, class: Classes.all },
+      { slug:	"combatstaff", type: ItemTypes.twoHanded, class: Classes.monk },
+      { slug:	"flail2h", type: ItemTypes.twoHanded, class: Classes.crusader },
+      { slug:	"mightyweapon2h", type: ItemTypes.twoHanded, class: Classes.barbarian },
+      { slug:	"scythe2h", type: ItemTypes.twoHanded, class: Classes.necromancer },
+
+      // ranged
+      { slug:	"bow", type: ItemTypes.ranged, class: Classes.all },
+      { slug:	"crossbow", type: ItemTypes.ranged, class: Classes.all },
+      { slug:	"handxbow", type: ItemTypes.ranged, class: Classes.demonHunter },
+      { slug:	"wand", type: ItemTypes.ranged, class: Classes.wizard },
+    ],
+    items: [
+
     ]
   }
 }

@@ -10,6 +10,34 @@ const GroupedItemTypeCache = new CacheContainer(new MemoryStorage());
 const AllItemTypeCache = new CacheContainer(new MemoryStorage());
 
 export abstract class CustomItemTypesController {
+
+  /**
+   * GET | Request to get an index of my custom grouped item types.
+   * 
+   * @param req 
+   * @param res 
+   */
+  public static async getGroupedItemTypeIndex(req: Request, res: Response) {
+    try {
+      let types = [];
+      let region = req.params["region"];
+      let locale = req.params["locale"];
+
+      for (const itemType in StorageHelper.Categories) {
+        let item = {
+          slug: itemType,
+          url: URLHandler.getEndpointUrl(Endpoints.cGroupedItemTypeIndex, itemType, locale, region)
+        };
+        types.push(item);
+      }
+
+      res.json(types);
+    } catch(error: any) {
+      console.error(error);
+      ErrorHandler.Handle(req, res, error);
+    }
+  }
+
   /**
    * Fetches all items in a category by slug defined in the StorageHelper 
    * (src/helpers/StorageHelper.helpers.ts).
@@ -50,33 +78,6 @@ export abstract class CustomItemTypesController {
   }
   
   /**
-   * GET | Request to get an index of my custom grouped item types.
-   * 
-   * @param req 
-   * @param res 
-   */
-  public static async getGroupedItemTypeIndex(req: Request, res: Response) {
-    try {
-      let types = [];
-      let region = req.params["region"];
-      let locale = req.params["locale"];
-
-      for (const itemType in StorageHelper.Categories) {
-        let item = {
-          slug: itemType,
-          url: URLHandler.getEndpointUrl(Endpoints.cGroupedItemTypeIndex, itemType, locale, region)
-        };
-        types.push(item);
-      }
-
-      res.json(types);
-    } catch(error: any) {
-      console.error(error);
-      ErrorHandler.Handle(req, res, error);
-    }
-  }
-  
-  /**
    *  GET | Runs multiple requests, constructing a combined
    * array of items of the given slug.
    * 
@@ -89,10 +90,17 @@ export abstract class CustomItemTypesController {
     try {
       let slug = req.params["type"] as ItemTypes;
       let locale = req.params["locale"];
-  
-      //if (!StorageHelper.Categories[slug]) throw "Invalid slug provided.";
+      let searchTerm = req.params["search"];
 
       let data = await this.fetchGroupedItemType(slug, locale);
+      if (searchTerm) {
+        data = data.filter((item: any) => {
+          let propertyName = req.params["property"]?.toLowerCase();
+          let property = (item.hasOwnProperty(propertyName)) ? propertyName : "name";
+          return item[property].toLowerCase().includes(searchTerm);
+        });
+      }
+      
       res.json(data);
     } catch(error: any) {
       console.error(error);
@@ -159,15 +167,19 @@ export abstract class CustomItemTypesController {
    * @param res 
    */
   public static async getItemByName(req: Request, res: Response) {
-    let locale = req.params["locale"];
-    let region = req.params["region"];
-    let searchValue = req.params["search"].toLowerCase();
-
     try {
-      let data = await this.fetchAllItemTypes(locale, region);
-      let filtered = data.filter((value: ItemType) => value.name.toLowerCase().includes(searchValue));
+      let locale = req.params["locale"];
+      let region = req.params["region"];
+      let searchTerm = req.params["search"]?.toLowerCase();
 
-      res.json(filtered);
+      let data = await this.fetchAllItemTypes(locale, region);
+      data = data.filter((item: any) => {
+        let propertyName = req.params["property"]?.toLowerCase();
+        let property = (item.hasOwnProperty(propertyName)) ? propertyName : "name";
+        return item[property].toLowerCase().includes(searchTerm);
+      });
+
+      res.json(data);
     } catch(error: any) {
       console.error(error);
       ErrorHandler.Handle(req, res, error);

@@ -3,35 +3,6 @@
 slugs from blizzards item type API that are
 currently not grouped properly.
 
-==== ONE HANDED ====
-slug	"axe"
-slug	"dagger"
-slug	"mace"
-slug	"spear"
-slug	"sword"
-slug	"ceremonialdagger"
-slug	"fistweapon"
-slug	"flail1h"
-slug	"mightyweapon1h"
-slug	"scythe1h"
-
-==== TWO HANDED ====
-slug	"axe2h"
-slug	"mace2h"
-slug	"polearm"
-slug	"staff"
-slug	"sword2h"
-slug	"combatstaff" // DAIBO
-slug	"flail2h"
-slug	"mightyweapon2h"
-slug	"scythe2h"
-
-==== RANGED ====
-slug	"bow"
-slug	"crossbow"
-slug	"handxbow"
-slug	"wand"
-
 ==== ETHERIALS ====
 slug	"flail"
 slug	"ballista"

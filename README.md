@@ -23,33 +23,47 @@ This is my take on writing a TypeScript wrapper for Blizzards Diablo3 API with c
 
 ## Covered Endpoints
 
-### - `:region/:locale/item-types`
+**ALL** Endpoints are prefixed with `/:region/:locale`.
+
+- `/item-types`
 
 returns all item types
 
-### - `:region/:locale/item-types/:type`
+- `/item-types/:type`
 
 returns all items by slug `type`
 
-### - `:region/:locale/item/:item`
+- `/item/:item`
 
 returns detailed information about an item by given item-slug and item-id
 
-### - `:region/:locale/v1/item-types/`
+- `/v1/item-types/`
 
 custom endpoint returning an index of available grouped item-type slugs
 
-### - `:region/:locale/v1/item-types/:slug`
+- `/v1/item-types/:slug`
 
 custom endpoint returning grouped results for item-types like `bootsnecromancer`, `bootscrusader` and `boots` under one single endpoint called `boots`
 
-### - `:region/:locale/v1/all-items`
+- `/v1/item-types/:slug/:search`
+
+custom endpoint returning grouped results for item-types under one single endpoint. Allows search for items including the search-term in their name.
+
+- `/v1/item-types/:slug/:property/:search`
+
+Same as before but this endpoint allows the search to be performed on a different property of the item. If the given property does not exist the name will be used.
+
+- `/v1/all-items`
 
 returns all items defined in the Storage Helper, this function is relatively slow though it gets cached after being called once. Only use this if you really have to
 
-### - `region/:locale/v1/all-items/:search`
+- `/v1/all-items/:search`
 
 returns a filtered list of items containing the search-term in their name.
+
+- `/v1/all-items/:property/:search`
+
+returns a filtered list of items containing the search-term in their property, if the provided property is invalid the item's name is used.
 
 <a name="parameters">
 
@@ -96,6 +110,7 @@ All locales _should_ work, though only de_DE and en_US are actively being tested
 - `/boots` - Boots
 - `/offhand` - Offhand
 - `/follower` - Follower
+- `/weapon` - Weapons
 
 <a name="todo"></a>
 
@@ -132,10 +147,10 @@ All locales _should_ work, though only de_DE and en_US are actively being tested
 - - [x] get all items\*
 - - [x] get list of custom item-types
 - - [x] search item
-- - [ ] search item by property
+- - [x] search item by property
 - [ ] group categories like bootsmonk, bootsnecromancer, etc
 - - [x] Armor
-- - [ ] Weapons
+- - [x] Weapons
 - - [ ] Other
 - [ ] create devops workflows
 - [x] implement support for multiple regions
