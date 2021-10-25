@@ -37,16 +37,6 @@ export abstract class StorageHelper {
    * like item-type or item-class
    */
   public static Categories: Record<keyof ItemCategories, ItemTypeCategory[]> = {
-    boots: [
-      { slug: "boots", type: "boots", class: this.Classes.all},
-      { slug: "bootsbarbarian", type: "boots", class: this.Classes.barbarian},
-      { slug: "bootscrusader", type: "boots", class: this.Classes.crusader},
-      { slug: "bootsdemonhunter", type: "boots", class: this.Classes.demonHunter},
-      { slug: "bootsmonk", type: "boots", class: this.Classes.monk},
-      { slug: "bootsnecromancer", type: "boots", class: this.Classes.necromancer},
-      { slug: "bootswitchdoctor", type: "boots", class: this.Classes.witchDoctor},
-      { slug: "bootswizard", type: "boots", class: this.Classes.wizard},
-    ],
     head: [
       { slug: "helm", type: "head", class: this.Classes.all},
       { slug: "generichelm", type: "head", class: this.Classes.all },
@@ -111,6 +101,16 @@ export abstract class StorageHelper {
       { slug: "legsnecromancer", type: "legs", class: this.Classes.necromancer },
       { slug: "legswitchdoctor", type: "legs", class: this.Classes.witchDoctor },
       { slug: "legswizard", type: "legs", class: this.Classes.wizard },
+    ],
+    boots: [
+      { slug: "boots", type: "boots", class: this.Classes.all},
+      { slug: "bootsbarbarian", type: "boots", class: this.Classes.barbarian},
+      { slug: "bootscrusader", type: "boots", class: this.Classes.crusader},
+      { slug: "bootsdemonhunter", type: "boots", class: this.Classes.demonHunter},
+      { slug: "bootsmonk", type: "boots", class: this.Classes.monk},
+      { slug: "bootsnecromancer", type: "boots", class: this.Classes.necromancer},
+      { slug: "bootswitchdoctor", type: "boots", class: this.Classes.witchDoctor},
+      { slug: "bootswizard", type: "boots", class: this.Classes.wizard},
     ],
     jewelry: [
       { slug: "amulet", type: "necklace", class: this.Classes.all },
