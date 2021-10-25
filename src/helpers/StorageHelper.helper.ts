@@ -11,11 +11,11 @@ export interface ItemTypeCategory {
   class: string,
 }
 
-/**
- * Table used for storing the character classes and having
- * easy access to their slugs for API endpoints.
- */
 export abstract class StorageHelper {
+  /**
+   * Table used for storing the character classes and having
+   * easy access to their slugs for API endpoints.
+   */
   public static Classes: Record<keyof HeroClasses, string> = {
     all: "all",
     barbarian: "barbarian",
