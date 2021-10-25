@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
-import { URLHandler, RequestBuilder } from '../../helpers';
+import { URLHandler, RequestBuilder, ErrorHandler } from '../../helpers';
 import { Item } from '../../models';
 import { Endpoints } from '../../types';
 import Config from '../../config/config';
@@ -49,6 +49,7 @@ export class ItemController {
 
     let data = await this.fetchItem(slug, locale, region).catch(error => {
       console.error(error);
+      ErrorHandler.Handle(req, res, error);
     });
 
     res.json(data);

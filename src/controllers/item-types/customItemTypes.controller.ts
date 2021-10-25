@@ -50,11 +50,11 @@ export abstract class CustomItemTypesController {
    * @param res 
    */
   public static async getGroupedItemTypeIndex(req: Request, res: Response) {
-    let types = [];
-    let region = req.params["region"];
-    let locale = req.params["locale"];
-
     try {
+      let types = [];
+      let region = req.params["region"];
+      let locale = req.params["locale"];
+
       for (const itemType in StorageHelper.Categories) {
         let item = {
           slug: itemType,
@@ -62,12 +62,12 @@ export abstract class CustomItemTypesController {
         };
         types.push(item);
       }
-    } catch(error: any) {
-      ErrorHandler.Handle(req, res, error);
-      return;
-    }
 
-    res.json(types);
+      res.json(types);
+    } catch(error: any) {
+      console.error(error);
+      ErrorHandler.Handle(req, res, error);
+    }
   }
   
   /**
@@ -80,20 +80,17 @@ export abstract class CustomItemTypesController {
    * @param res 
    */
   public static async getGroupedItemType(req: Request, res: Response) {
-    let slug = req.params["type"] as ItemTypes;
-    let locale = req.params["locale"];
-
-    if (!StorageHelper.Categories[slug]) {
-      ErrorHandler.Handle(req, res, "Invalid Slug");
-      return;
-    }
-
     try {
+      let slug = req.params["type"] as ItemTypes;
+      let locale = req.params["locale"];
+  
+      if (!StorageHelper.Categories[slug]) throw "Invalid slug provided";
+
       let data = await this.fetchGroupedItemType(slug, locale);
       res.json(data);
     } catch(error: any) {
       console.error(error);
-      ErrorHandler.Handle(req, res, "Something terrible happened :c");
+      ErrorHandler.Handle(req, res, error);
     }
   }
 
@@ -125,7 +122,7 @@ export abstract class CustomItemTypesController {
       res.json(data);
     } catch(error: any) {
       console.error(error);
-      ErrorHandler.Handle(req, res, "Something terrible happened :c");
+      ErrorHandler.Handle(req, res, error);
     }
   }
 }
