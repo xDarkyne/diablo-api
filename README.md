@@ -49,23 +49,35 @@ returns all items defined in the Storage Helper, this function is relatively slo
 
 <a name="parameters">
 
-## Tested Parameters
+## Parameters
 
 ### Regions
 
-- Europe `eu` (default)
-- USA `us`
+- `eu` - Europe (default)
+- `us` - North America
+- `kr` - Korea
+- `tw` - Taiwan
+- `ch` - China
 
-Although only those were tested, all regions (except china) _should_ work.
+All regions _should_ work, though only eu and us is actively being tested.
 
 ### Locales
 
-- German - `de_DE` (default)
-- English (US) - `en_US`
-- Espanol (Spain) - `es_ES`
+- `en_US` - English - UNITED STATES OF AMERICA
+- `en_GB` - English - UNITED KINGDOM
+- `de_DE` - German - GERMANY
+- `fr_FR` - French - FRANCE
+- `it_IT` - Italian - ITALY
+- `ru_RU` - Russian - RUSSIAN FEDERATION
+- `pt_PT` - Portuguese - PORTUGAL
+- `pt_BR` - Portuguese - BRAZIL
+- `es_MX` - Spanish - MEXICO
+- `es_ES` - Spanish - SPAIN
+- `ko_KR` - Korean - REPUBLIC OF KOREA
+- `zh_TW` - Chinese - TAIWAN
+- `zh_CN` - Chinese - CHINA
 
-Although only those were tested, all locales _should_ work.
-You can find your locale [here](https://saimana.com/list-of-country-locale-code/).
+All locales _should_ work, though only de_DE and en_US are actively being tested.
 
 ### Grouped item types
 
@@ -123,6 +135,7 @@ You can find your locale [here](https://saimana.com/list-of-country-locale-code/
 - - [ ] Other
 - [ ] create devops workflows
 - [x] implement support for multiple regions
+- [x] implement support for oauth in multiple regions
 - [x] allow localization
 - [ ] make api more resilient against errors
 - [ ] write detailed documentation for api

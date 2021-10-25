@@ -44,8 +44,13 @@ export class ItemTypeController {
    * @param res 
    */
   public static getItemTypeIndex = async(req: Request, res: Response) => {
-    let data = await this.fetchItemTypeIndex(req.params["locale"]);
-    res.json(data);
+    try {
+      let data = await this.fetchItemTypeIndex(req.params["locale"], req.params["region"]);
+      res.json(data);
+    } catch(error: any) {
+      console.error(error);
+      ErrorHandler.Handle(req, res, error);
+    }
   }
 
   /**

@@ -3,20 +3,21 @@ import { Cache, CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { stringify } from "querystring";
 import { RequestConfig } from "../models";
-import config from '../config/config';
+import Config from '../config/config';
 
 const tokenCache = new CacheContainer(new MemoryStorage());
 
 export class RequestBuilder {
 
   /**
-   * Easy storage of Blizzard's Region URLS
-   * 
-   * MULTIPLE REGIONS ARE NOT YET SUPPORTED
+   * Easy storage of Blizzard's Region URLs
    */
-  private static Urls: Record<string, string> = {
-    "eu": "https://eu.api.blizzard.com/",
-    "us": "https://us.api.blizzard.com/"
+  private static URLS: Record<string, { api: string, auth: string }> = {
+    "eu": { api: "https://eu.api.blizzard.com/", auth: "https://eu.battle.net/" },
+    "us": { api: "https://us.api.blizzard.com/", auth: "https://us.battle.net/" },
+    "kr": { api: "https://kr.api.blizzard.com/", auth: "https://apac.battle.net/" },
+    "tw": { api: "https://tw.api.blizzard.com/", auth: "https://apac.battle.net/" },
+    "cn": { api: "https://gateway.battlenet.com.cn/", auth: "https://www.battlenet.com.cn/" },
   }
 
   /**
@@ -26,16 +27,17 @@ export class RequestBuilder {
    * @returns 
    */
   @Cache(tokenCache, { ttl: 3600 })
-  private static async getAccessToken(): Promise<string> {
-    if (config.CLIENT_ID === "" || config.CLIENT_SECRET === "") throw "Could not recieve access token.";
+  private static async getAccessToken(region: string = Config.DEFAULT_REGION): Promise<string> {
+    if (Config.CLIENT_ID === "" || Config.CLIENT_SECRET === "") throw "Could not recieve access token.";
+    let url = this.URLS[region].auth;
 
     let requestData: AxiosRequestConfig = {
-      url: "/oauth/token",
+      url: "oauth/token",
       method: "POST",
-      baseURL: "https://eu.battle.net",
+      baseURL: url,
       auth: {
-        username: config.CLIENT_ID,
-        password: config.CLIENT_SECRET
+        username: Config.CLIENT_ID,
+        password: Config.CLIENT_SECRET
       },
       data: stringify({"grant_type": "client_credentials"})
     };
@@ -60,19 +62,19 @@ export class RequestBuilder {
    * @returns 
    */
   public static async getRequest(requestParams: RequestConfig): Promise<AxiosRequestConfig> {
-    let token = await this.getAccessToken();
+    let token = await this.getAccessToken(requestParams.region);
     let slug = requestParams.slug || "";
     let url = requestParams.endpoint + slug;
 
     const requestConfig: AxiosRequestConfig = {
       url: url,
-      baseURL: this.Urls[requestParams.region],
+      baseURL: this.URLS[requestParams.region].api,
       method: requestParams.method || "GET",
       headers: {
         "Authorization": `bearer ${token}`
       },
       params: {
-        "locale": requestParams.locale || config.DEFAULT_LOCALE
+        "locale": requestParams.locale || Config.DEFAULT_LOCALE
       }
     };
 
