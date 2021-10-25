@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { ItemType, ItemCategories } from '../models';
-import { StorageHelper, ErrorHandler, RequestBuilder } from '../helpers';
+import { StorageHelper, ErrorHandler, RequestBuilder, URLHandler } from '../helpers';
 import Config from '../config/config';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
@@ -28,7 +28,7 @@ export class ItemTypeController {
 
     await Promise.all(data.map(async(type: ItemType) => {
       type.slug = type.path.split("/")[1];
-      type.url = RequestBuilder.getUrl("item-types", type.slug, locale);
+      type.url = URLHandler.getEndpointUrl("item-types", type.slug, locale);
     }));
 
     return data;
@@ -60,14 +60,14 @@ export class ItemTypeController {
     try {
       let config = await RequestBuilder.getRequest({
         endpoint: "itemTypeIndex",
-        region: "eu",
+        region: region,
         slug: slug,
         locale: locale
       });
       let data = await RequestBuilder.makeRequest<ItemType[]>(config);
   
       await Promise.all(data.map(async(item: ItemType) => {
-        item.url = RequestBuilder.getUrl("item", item.path.split("/")[1], locale);
+        item.url = URLHandler.getEndpointUrl("item", item.path.split("/")[1], locale);
       }));
   
       return data;

@@ -62,19 +62,6 @@ export class RequestBuilder {
   }
 
   /**
-   * Constructs and returns a string with the App URL,
-   * locale, endpoint and slug for easy access trough the API.
-   * 
-   * @param endpoint 
-   * @param slug 
-   * @param region 
-   * @returns 
-   */
-  public static getUrl(endpoint: string, slug: string = "", locale: string = config.DEFAULT_LOCALE, region: string = config.DEFAULT_REGION): string {
-    return `${config.URL}/${region}/${locale}/${endpoint}/${slug}`;
-  }
-
-  /**
    * Helper function to construct a axiosRequestConfig for
    * easy use in the project. Return a Promise of
    * type AxiosRequestConfig.
