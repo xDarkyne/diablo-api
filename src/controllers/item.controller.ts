@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
-import { RequestBuilder } from '../helpers/RequestBuilder.helper';
-import Config from '../config/config';
+import { URLHandler, RequestBuilder } from '../helpers';
 import { Item } from '../models';
-import { URLHandler } from '../helpers';
+import Config from '../config/config';
 
 const ItemCache = new CacheContainer(new MemoryStorage());
 
