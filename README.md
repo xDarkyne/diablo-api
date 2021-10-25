@@ -35,13 +35,17 @@ returns all items by slug `type`
 
 returns detailed information about an item by given item-slug and item-id
 
+### - `:region/:locale/v1/item-types/`
+
+custom endpoint returning an index of available grouped item-type slugs
+
 ### - `:region/:locale/v1/item-types/:slug`
 
-custom endpoint returning grouped results for item-types like `bootsnecromancer`, `bootscrusader` and `boots` under one single endpoint called `boots`.
+custom endpoint returning grouped results for item-types like `bootsnecromancer`, `bootscrusader` and `boots` under one single endpoint called `boots`
 
 ### - `:region/:locale/v1/items-all`
 
-returns all items defined in the Storage Helper, this function is relatively slow though it gets cached after being called once. Only use this if you really have to.
+returns all items defined in the Storage Helper, this function is relatively slow though it gets cached after being called once. Only use this if you really have to
 
 <a name="parameters">
 

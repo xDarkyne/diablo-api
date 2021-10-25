@@ -29,7 +29,7 @@ export class ItemTypeController {
 
     await Promise.all(data.map(async(type: ItemType) => {
       type.slug = type.path.split("/")[1];
-      type.url = URLHandler.getEndpointUrl("item-types", type.slug, locale);
+      type.url = URLHandler.getEndpointUrl(Endpoints.cItemType, type.slug, locale);
     }));
 
     return data;
@@ -68,7 +68,7 @@ export class ItemTypeController {
       let data = await RequestBuilder.makeRequest<ItemType[]>(config);
   
       await Promise.all(data.map(async(item: ItemType) => {
-        item.url = URLHandler.getEndpointUrl("item", item.path.split("/")[1], locale);
+        item.url = URLHandler.getEndpointUrl(Endpoints.cItem, item.path.split("/")[1], locale);
       }));
   
       return data;
@@ -122,6 +122,32 @@ export class ItemTypeController {
     } catch(error: any) {
       throw "Something terrible happened";
     }
+  }
+
+  /**
+   * GET | Request to get an index of my custom grouped item types.
+   * 
+   * @param req 
+   * @param res 
+   */
+  public static async getGroupedItemTypeIndex(req: Request, res: Response) {
+    let types = [];
+    let region = req.params["region"];
+    let locale = req.params["locale"];
+
+    try {
+      for (const itemType in StorageHelper.Categories) {
+        let item = {
+          slug: itemType,
+          url: URLHandler.getEndpointUrl(Endpoints.cGroupedItemTypeIndex, itemType, locale, region)
+        };
+        types.push(item);
+      }
+    } catch(error) {
+
+    }
+
+    res.json(types);
   }
 
   /**

@@ -14,6 +14,7 @@ DiabloRouter.get('/:region/:locale/item/:item', (req: Request, res: Response) =>
 /**
  * Custom Endpoints
  */
+DiabloRouter.get('/:region/:locale/v1/item-types/', (req: Request, res: Response) => ItemTypeController.getGroupedItemTypeIndex(req, res));
 DiabloRouter.get('/:region/:locale/v1/item-types/:type', (req: Request, res: Response) => ItemTypeController.getGroupedItemType(req, res));
 DiabloRouter.get('/:region/:locale/v1/items-all/', (req: Request, res: Response) => ItemTypeController.getAllItemTypes(req, res));
 

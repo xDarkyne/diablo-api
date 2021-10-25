@@ -1,4 +1,5 @@
 import Config from "../config/config"
+import { Endpoints } from "../types";
 
 export class URLHandler {
     /**
@@ -10,8 +11,8 @@ export class URLHandler {
    * @param region 
    * @returns 
    */
-  public static getEndpointUrl(endpoint: string, slug: string = "", locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): string {
-    return `${Config.URL}/${region}/${locale}/${endpoint}/${slug}`;
+  public static getEndpointUrl(endpoint: Endpoints, slug: string = "", locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): string {
+    return `${Config.URL}/${region}/${locale}/${endpoint}${slug}`;
   }
 
   public static getMediaURL(endpoint: string, size: string, icon: string) {
