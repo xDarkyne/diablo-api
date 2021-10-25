@@ -20,12 +20,11 @@ export class ItemTypesController {
    */
   @Cache(ItemTypeIndexCache, { ttl: 3600 })
   private static async fetchItemTypeIndex(locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
-    let config = await RequestBuilder.getRequest({
+    let data = await RequestBuilder.GET<ItemType[]>({
       endpoint: Endpoints.ItemTypeIndex,
       region: region,
       locale: locale,
     });
-    let data = await RequestBuilder.makeRequest<ItemType[]>(config);
 
     await Promise.all(data.map(async(type: ItemType) => {
       type.slug = type.path.split("/")[1];
@@ -64,13 +63,12 @@ export class ItemTypesController {
   @Cache(ItemTypeCache, { ttl: 3600 })
   private static async fetchItemType(slug: string, locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
     try {
-      let config = await RequestBuilder.getRequest({
+      let data = await RequestBuilder.GET<ItemType[]>({
         endpoint: Endpoints.ItemType,
         region: region,
         slug: slug,
         locale: locale
       });
-      let data = await RequestBuilder.makeRequest<ItemType[]>(config);
   
       await Promise.all(data.map(async(item: ItemType) => {
         item.url = URLHandler.getEndpointUrl(Endpoints.cItem, item.path.split("/")[1], locale);

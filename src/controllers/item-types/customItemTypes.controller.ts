@@ -19,14 +19,13 @@ export abstract class CustomItemTypesController {
     try {
       let data = [] as ItemType[];
       await Promise.all(StorageHelper.Categories[slug].map(async(category) => {
-        let config = await RequestBuilder.getRequest({
+        let slugData = await RequestBuilder.GET<ItemType[]>({
           endpoint: Endpoints.ItemType,
           region: region,
           slug: category.slug,
           locale: locale
         });
-
-        let slugData = await RequestBuilder.makeRequest<ItemType[]>(config);
+        
         await Promise.all(slugData.map(async(item: ItemType) => {
           item.type = category.type;
           item.class = category.class;
@@ -60,8 +59,9 @@ export abstract class CustomItemTypesController {
         };
         types.push(item);
       }
-    } catch(error) {
-
+    } catch(error: any) {
+      ErrorHandler.Handle(req, res, error);
+      return;
     }
 
     res.json(types);

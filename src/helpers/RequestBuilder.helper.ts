@@ -52,45 +52,30 @@ export class RequestBuilder {
 
     return token;
   }
-
+  
   /**
-   * Helper function to construct a axiosRequestConfig for
-   * easy use in the project. Return a Promise of
-   * type AxiosRequestConfig.
+   * Helper function for easy axios requests
    * 
-   * @param requestParams 
+   * @param params 
    * @returns 
    */
-  public static async getRequest(requestParams: RequestConfig): Promise<AxiosRequestConfig> {
-    let token = await this.getAccessToken(requestParams.region);
-    let slug = requestParams.slug || "";
-    let url = requestParams.endpoint + slug;
+  public static async GET<T>(params: RequestConfig): Promise<T> {
+    let token = await this.getAccessToken(params.region);
+    let slug = params.slug || "";
 
-    const requestConfig: AxiosRequestConfig = {
-      url: url,
-      baseURL: this.URLS[requestParams.region].api,
-      method: requestParams.method || "GET",
+    const config: AxiosRequestConfig = {
+      url: params.endpoint + slug,
+      baseURL: this.URLS[params.region].api,
+      method: params.method || "GET",
       headers: {
         "Authorization": `bearer ${token}`
       },
       params: {
-        "locale": requestParams.locale || Config.DEFAULT_LOCALE
+        "locale": params.locale || Config.DEFAULT_LOCALE
       }
     };
 
-    return requestConfig;
-  }
-
-  /**
-   * Helper function used for making axios Requests and converting
-   * the response to a type for easy use in the project. Return a Promise
-   * of a provided type T.
-   * 
-   * @param requestConfig 
-   * @returns 
-   */
-  public static async makeRequest<T>(requestConfig: AxiosRequestConfig): Promise<T> {
-    let data = await axios.request<T>(requestConfig)
+    let data = await axios.request<T>(config)
       .then((res: AxiosResponse) => {
         return res.data;
       })

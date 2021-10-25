@@ -20,13 +20,13 @@ export class ItemController {
   @Cache(ItemCache, { ttl: 3600 })
   private static async fetchItem(slug: string, locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<Item> {
     try {
-      let config = await RequestBuilder.getRequest({
+      let data = await RequestBuilder.GET<Item>({
         endpoint: Endpoints.Item,
         region: region,
         slug: slug,
         locale: locale,
       });
-      let data = await RequestBuilder.makeRequest<Item>(config);
+      
       data.iconSmallURL = URLHandler.getMediaURL("items", "small", data.icon!);
       data.iconLargeURL = URLHandler.getMediaURL("items", "large", data.icon!);
       return data;
