@@ -6,6 +6,8 @@ import { ItemType } from '../../models';
 import { Endpoints, ItemTypes } from '../../types';
 import Config from '../../config/config';
 
+const GroupedItemTypeCache = new CacheContainer(new MemoryStorage());
+
 export abstract class CustomItemTypesController {
   /**
    * Fetches all items in a category by slug defined in the StorageHelper 
@@ -15,6 +17,7 @@ export abstract class CustomItemTypesController {
    * @param locale 
    * @returns 
    */
+  @Cache(GroupedItemTypeCache, { ttl: 3600 })
   private static async fetchGroupedItemType(slug: ItemTypes, locale: string, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
     try {
       let data = [] as ItemType[];

@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import DiabloRouter from './diablo.routes'
+import GroupedItemTypesRouter from './groupedItemTypes.routes';
+import ItemRouter from './item.routes';
+import ItemTypeRouter from './itemTypes.routes';
 
 const Routes = Router();
 
-Routes.use(DiabloRouter);
+Routes.use(ItemTypeRouter);
+Routes.use(GroupedItemTypesRouter);
+Routes.use(ItemRouter);
 
 export = Routes;
