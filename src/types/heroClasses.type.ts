@@ -1,18 +1,18 @@
 /**
  * List of class keys including followers.
  */
-export type HeroClasses = {
-  all: string,
-  barbarian: string,
-  crusader: string,
-  demonHunter: string,
-  monk: string,
-  necromancer: string,
-  witchDoctor: string,
-  wizard: string
+export enum Classes{
+  all = "all",
+  barbarian = "barbarian",
+  crusader = "crusader",
+  demonHunter = "demon-hunter",
+  monk = "monk",
+  necromancer = "necromancer",
+  witchDoctor = "witch-doctor",
+  wizard = "wizard",
 
   // non playable
-  enchantress: string,
-  scoundrel: string
-  templar: string,
+  enchantress = "enchantress",
+  scoundrel = "scoundrel",
+  templar = "templar",
 }

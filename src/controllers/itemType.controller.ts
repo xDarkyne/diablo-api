@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
-import { ItemType, ItemCategories } from '../models';
 import { StorageHelper, ErrorHandler, RequestBuilder, URLHandler } from '../helpers';
+import { ItemType, ItemCategories } from '../models';
+import { Endpoints } from '../types';
 import Config from '../config/config';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
@@ -20,7 +21,7 @@ export class ItemTypeController {
   @Cache(ItemTypeIndexCache, { ttl: 3600 })
   private static async fetchItemTypeIndex(locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
     let config = await RequestBuilder.getRequest({
-      endpoint: "itemTypeIndex",
+      endpoint: Endpoints.ItemTypeIndex,
       region: region,
       locale: locale,
     });
@@ -59,7 +60,7 @@ export class ItemTypeController {
   private static async fetchItemType(slug: string, locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
     try {
       let config = await RequestBuilder.getRequest({
-        endpoint: "itemTypeIndex",
+        endpoint: Endpoints.ItemType,
         region: region,
         slug: slug,
         locale: locale

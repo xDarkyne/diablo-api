@@ -21,15 +21,6 @@ export class RequestBuilder {
   }
 
   /**
-   * Easy storage of Blizzard's API endpoints
-   */
-  private  static Endpoints: Record<keyof Endpoints, string> = {
-    seasonIndex: "data/d3/season/",
-    itemTypeIndex: "d3/data/item-type/",
-    item: "d3/data/item/"
-  }
-
-  /**
    * Fetches, caches and returns an access token for Blizzard's API
    * with the provided client ID and client secret.
    * 
@@ -72,7 +63,7 @@ export class RequestBuilder {
   public static async getRequest(requestParams: RequestConfig): Promise<AxiosRequestConfig> {
     let token = await this.getAccessToken();
     let slug = requestParams.slug || "";
-    let url = this.Endpoints[requestParams.endpoint] + slug;
+    let url = requestParams.endpoint + slug;
 
     const requestConfig: AxiosRequestConfig = {
       url: url,

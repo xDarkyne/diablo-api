@@ -6,7 +6,7 @@ import { Endpoints } from "../types";
  * helper class for avoiding redundancy in requests.
  */
 export interface RequestConfig {
-  endpoint: keyof Endpoints,
+  endpoint: Endpoints,
   region: string,
   method?: Method,
   data?: Object,

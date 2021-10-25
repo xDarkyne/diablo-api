@@ -1,2 +1,2 @@
 export { Endpoints } from "./endpoints.type";
-export { HeroClasses } from "./heroClasses.type";
+export { Classes } from "./heroClasses.type";

@@ -3,6 +3,7 @@ import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { URLHandler, RequestBuilder } from '../helpers';
 import { Item } from '../models';
+import { Endpoints } from '../types';
 import Config from '../config/config';
 
 const ItemCache = new CacheContainer(new MemoryStorage());
@@ -20,7 +21,7 @@ export class ItemController {
   private static async fetchItem(slug: string, locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<Item> {
     try {
       let config = await RequestBuilder.getRequest({
-        endpoint: "item",
+        endpoint: Endpoints.Item,
         region: region,
         slug: slug,
         locale: locale,
