@@ -3,6 +3,7 @@
  */
 export enum Endpoints {
   // Blizzard
+  Auth = "oauth/token",
   Item = "d3/data/item/",
   ItemTypeIndex = "d3/data/item-type/",
   ItemType = "d3/data/item-type/",

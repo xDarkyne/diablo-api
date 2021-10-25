@@ -4,6 +4,7 @@ import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { stringify } from "querystring";
 import { RequestConfig } from "../models";
 import Config from '../config/config';
+import { Endpoints } from "../types";
 
 const tokenCache = new CacheContainer(new MemoryStorage());
 
@@ -28,28 +29,20 @@ export class RequestBuilder {
    */
   @Cache(tokenCache, { ttl: 3600 })
   private static async getAccessToken(region: string = Config.DEFAULT_REGION): Promise<string> {
-    if (Config.CLIENT_ID === "" || Config.CLIENT_SECRET === "") throw "Could not recieve access token.";
-    let url = this.URLS[region].auth;
+    if (Config.CLIENT_ID === "" || Config.CLIENT_SECRET === "") throw "Client credentials not defined.";
 
-    let requestData: AxiosRequestConfig = {
-      url: "oauth/token",
+    let data = await this.GET<any>({
+      endpoint: Endpoints.Auth,
+      region: region,
       method: "POST",
-      baseURL: url,
       auth: {
         username: Config.CLIENT_ID,
         password: Config.CLIENT_SECRET
       },
       data: stringify({"grant_type": "client_credentials"})
-    };
+    }, "auth");
 
-    const token = await axios.request(requestData)
-      .then((res: AxiosResponse) => {
-        return res.data.access_token;
-      })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
-
+    const token = data.access_token;
     return token;
   }
   
@@ -59,29 +52,35 @@ export class RequestBuilder {
    * @param params 
    * @returns 
    */
-  public static async GET<T>(params: RequestConfig): Promise<T> {
-    let token = await this.getAccessToken(params.region);
+  public static async GET<T>(params: RequestConfig, type: keyof { api: string, auth: string } = "api"): Promise<T> {
     let slug = params.slug || "";
+    let url = this.URLS[params.region][type];
 
     const config: AxiosRequestConfig = {
       url: params.endpoint + slug,
-      baseURL: this.URLS[params.region].api,
+      baseURL: url,
       method: params.method || "GET",
-      headers: {
-        "Authorization": `bearer ${token}`
-      },
       params: {
         "locale": params.locale || Config.DEFAULT_LOCALE
-      }
+      },
     };
+
+    if (type === "auth") {
+      config.auth = params.auth;
+      config.data = params.data;
+    } else {
+      let token = await this.getAccessToken(params.region);
+      config.headers = {
+        "Authorization": `bearer ${token}`
+      };
+    }
 
     let data = await axios.request<T>(config)
       .then((res: AxiosResponse) => {
         return res.data;
       })
       .catch((error: AxiosError) => {
-        console.log(error);
-        throw "Something terrible happened";
+        throw error;
       });
     
     return data;
