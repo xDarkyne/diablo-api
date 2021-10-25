@@ -14,7 +14,7 @@ export class URLHandler {
     return `${Config.URL}/${region}/${locale}/${endpoint}/${slug}`;
   }
 
-  public static getMediaURL(endpoint: string) {
-    return `http://media.blizzard.com/d3/icons/${endpoint}`;
+  public static getMediaURL(endpoint: string, size: string, icon: string) {
+    return `http://media.blizzard.com/d3/icons/${endpoint}/${String(size)}/${icon}.png`;
   }
 }

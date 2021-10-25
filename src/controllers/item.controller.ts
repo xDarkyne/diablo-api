@@ -27,8 +27,8 @@ export class ItemController {
         locale: locale,
       });
       let data = await RequestBuilder.makeRequest<Item>(config);
-      data.iconSmallURL = URLHandler.getMediaURL(`items/small/${data.icon!}.png`);
-      data.iconLargeURL = URLHandler.getMediaURL(`items/large/${data.icon!}.png`);
+      data.iconSmallURL = URLHandler.getMediaURL("items", "small", data.icon!);
+      data.iconLargeURL = URLHandler.getMediaURL("items", "large", data.icon!);
       return data;
     } catch(error: any) {
       throw "Something terrible happened";
