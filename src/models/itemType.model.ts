@@ -1,4 +1,5 @@
 import { Base } from ".";
+import { ItemTypes } from "../types";
 
 /**
  * Interface used for typing item-type endpoints
@@ -6,5 +7,5 @@ import { Base } from ".";
 export interface ItemType extends Base {
   origin?: string;
   class?: string;
-  type?: string;
+  type?: ItemTypes;
 }

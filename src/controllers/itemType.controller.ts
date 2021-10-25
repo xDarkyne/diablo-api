@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { Cache, CacheContainer } from 'node-ts-cache';
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { StorageHelper, ErrorHandler, RequestBuilder, URLHandler } from '../helpers';
-import { ItemType, ItemCategories } from '../models';
-import { Endpoints } from '../types';
+import { ItemType } from '../models';
+import { Endpoints, ItemTypes } from '../types';
 import Config from '../config/config';
 
 const ItemTypeIndexCache = new CacheContainer(new MemoryStorage());
@@ -105,7 +105,7 @@ export class ItemTypeController {
    * @param locale 
    * @returns 
    */
-  private static async fetchGroupedItemType(slug: keyof ItemCategories, locale: string, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
+  private static async fetchGroupedItemType(slug: ItemTypes, locale: string, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
     try {
       let data = [] as ItemType[];
       await Promise.all(StorageHelper.Categories[slug].map(async(category) => {
@@ -134,7 +134,7 @@ export class ItemTypeController {
    * @param res 
    */
   public static async getGroupedItemType(req: Request, res: Response) {
-    let slug = req.params["type"] as keyof ItemCategories;
+    let slug = req.params["type"] as ItemTypes;
     let locale = req.params["locale"];
 
     if (!StorageHelper.Categories[slug]) {
@@ -171,7 +171,7 @@ export class ItemTypeController {
 
       let data = [] as ItemType[];
       await Promise.all(categories.map(async(item: string) => {
-        let slug = item as keyof ItemCategories;
+        let slug = item as ItemTypes;
         let subData = await this.fetchGroupedItemType(slug, locale, region);
         data.push(...subData);
       }));
