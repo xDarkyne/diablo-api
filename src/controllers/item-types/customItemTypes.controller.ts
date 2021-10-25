@@ -7,6 +7,7 @@ import { Endpoints, ItemTypes } from '../../types';
 import Config from '../../config/config';
 
 const GroupedItemTypeCache = new CacheContainer(new MemoryStorage());
+const AllItemTypeCache = new CacheContainer(new MemoryStorage());
 
 export abstract class CustomItemTypesController {
   /**
@@ -33,6 +34,10 @@ export abstract class CustomItemTypesController {
           item.type = category.type;
           item.class = category.class;
           item.origin  =  category.slug;
+          item.slug = item.path.split("/")[1]
+          item.url = URLHandler.getEndpointUrl(Endpoints.cItem, item.slug, locale, region);
+          item.iconSmallURL = URLHandler.getMediaURL("items", "small", item.icon!);
+          item.iconLargeURL = URLHandler.getMediaURL("items", "large", item.icon!);
           data.push(item);
         }));
       }));
@@ -96,17 +101,14 @@ export abstract class CustomItemTypesController {
   }
 
   /**
-   * GET | Endpoint to get a list of all items.
-   * Currently this does not provide all items since this function
-   * uses the StorageHelper which isn't complete yet.
+   * Fetches, caches and returns a list of all items.
    * 
-   * @param req 
-   * @param res 
+   * @param locale 
+   * @param region 
+   * @returns Array of type ItemType containing all items
    */
-  public static async getAllItemTypes(req: Request, res: Response) {
-    let locale = req.params["locale"];
-    let region = req.params["region"];
-
+  @Cache(AllItemTypeCache, { ttl: 3600 })
+  private static async fetchAllItemTypes(locale: string = Config.DEFAULT_LOCALE, region: string = Config.DEFAULT_REGION): Promise<ItemType[]> {
     try {
       let categories = [] as string[];
       for (const category in StorageHelper.Categories) {
@@ -120,10 +122,55 @@ export abstract class CustomItemTypesController {
         data.push(...subData);
       }));
 
+      return data;
+    } catch(error) {
+      console.error(error);
+      throw "Could not retrieve list of all item types.";
+    }
+  }
+
+  /**
+   * GET | Endpoint to get a list of all items.
+   * Currently this does not provide all items since this function
+   * uses the StorageHelper which isn't complete yet.
+   * 
+   * @param req 
+   * @param res 
+   */
+  public static async getAllItemTypes(req: Request, res: Response) {
+    let locale = req.params["locale"];
+    let region = req.params["region"];
+
+    try {
+      let data = await this.fetchAllItemTypes(locale, region);
+
       res.json(data);
     } catch(error: any) {
       console.error(error);
       ErrorHandler.Handle(req, res, error);
     }
+  }
+
+  /**
+   * GET | Endpoint allowing to search items based on their names.
+   * Support every locale.
+   * 
+   * @param req 
+   * @param res 
+   */
+  public static async getItemByName(req: Request, res: Response) {
+    let locale = req.params["locale"];
+    let region = req.params["region"];
+    let searchValue = req.params["search"].toLowerCase();
+
+    try {
+      let data = await this.fetchAllItemTypes(locale, region);
+      let filtered = data.filter((value: ItemType) => value.name.toLowerCase().includes(searchValue));
+
+      res.json(filtered);
+    } catch(error: any) {
+      console.error(error);
+      ErrorHandler.Handle(req, res, error);
+    } 
   }
 }

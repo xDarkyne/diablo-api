@@ -8,4 +8,6 @@ export interface ItemType extends Base {
   origin?: string;
   class?: string;
   type?: ItemTypes;
+  iconSmallURL?: string,
+  iconLargeURL?: string,
 }

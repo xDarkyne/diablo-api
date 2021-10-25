@@ -43,9 +43,13 @@ custom endpoint returning an index of available grouped item-type slugs
 
 custom endpoint returning grouped results for item-types like `bootsnecromancer`, `bootscrusader` and `boots` under one single endpoint called `boots`
 
-### - `:region/:locale/v1/items-all`
+### - `:region/:locale/v1/all-items`
 
 returns all items defined in the Storage Helper, this function is relatively slow though it gets cached after being called once. Only use this if you really have to
+
+### - `region/:locale/v1/all-items/:search`
+
+returns a filtered list of items containing the search-term in their name.
 
 <a name="parameters">
 
@@ -59,7 +63,7 @@ returns all items defined in the Storage Helper, this function is relatively slo
 - `tw` - Taiwan
 - `ch` - China
 
-All regions _should_ work, though only eu and us is actively being tested.
+All regions _should_ work, though only eu and us are actively being tested.
 
 ### Locales
 
@@ -81,17 +85,17 @@ All locales _should_ work, though only de_DE and en_US are actively being tested
 
 ### Grouped item types
 
-- Head - `/head`
-- Shoulders - `/shoulders`
-- Chest - `/chest`
-- Bracers - `/bracers`
-- Gloves - `/gloves`
-- Waist - `/waist`
-- Legs - `/legs`
-- Jewelry - `/jewelry`
-- Boots - `/boots`
-- Offhand - `/offhand`
-- Follower - `/follower`
+- `/head` - Head
+- `/shoulders` - Shoulders
+- `/chest` - Chest
+- `/bracers` - Bracers
+- `/gloves` - Gloves
+- `/waist` - Waist
+- `/legs` - Legs
+- `/jewelry` - Jewelry
+- `/boots` - Boots
+- `/offhand` - Offhand
+- `/follower` - Follower
 
 <a name="todo"></a>
 
@@ -127,7 +131,7 @@ All locales _should_ work, though only de_DE and en_US are actively being tested
 - ### CUSTOM
 - - [x] get all items\*
 - - [x] get list of custom item-types
-- - [ ] search item
+- - [x] search item
 - - [ ] search item by property
 - [ ] group categories like bootsmonk, bootsnecromancer, etc
 - - [x] Armor
