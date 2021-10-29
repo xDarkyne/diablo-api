@@ -1,4 +1,4 @@
-import Config from "../config/config"
+import { Config } from "../config/config"
 import { Endpoints } from "../types";
 
 export class URLHandler {

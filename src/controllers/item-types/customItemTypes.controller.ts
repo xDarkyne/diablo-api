@@ -4,7 +4,7 @@ import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { StorageHelper, ErrorHandler, RequestBuilder, URLHandler } from '../../helpers';
 import { ItemType } from '../../models';
 import { Endpoints, ItemTypes } from '../../types';
-import Config from '../../config/config';
+import { Config } from '../../config/config';
 
 const GroupedItemTypeCache = new CacheContainer(new MemoryStorage());
 const AllItemTypeCache = new CacheContainer(new MemoryStorage());

@@ -1,25 +1,26 @@
 import dotenv from "dotenv";
 
-class Config{
-  public NODE_ENV: string;
-  public PORT: number;
-  public URL: string;
-  public CLIENT_ID: string;
-  public CLIENT_SECRET: string;
-  public DEFAULT_LOCALE: string;
-  public DEFAULT_REGION: string;
+export abstract class Config{
+    public static NODE_ENV: string = this.GetEnv<string>("NODE_ENV");
+    public static PORT: number = this.GetEnv<number>("PORT");
+    public static URL: string = this.GetEnv<string>("URL");
+    public static CLIENT_ID: string = this.GetEnv<string>("CLIENT_ID");
+    public static CLIENT_SECRET: string = this.GetEnv<string>("CLIENT_SECRET");
+    public static DEFAULT_LOCALE: string = this.GetEnv<string>("DEFAULT_LOCALE");
+    public static DEFAULT_REGION: string = this.GetEnv<string>("DEFAULT_REGION");
 
-  constructor() {
-    dotenv.config();
-
-    this.NODE_ENV = String(process.env.NODE_ENV) || "development";
-    this.PORT = Number(process.env.PORT) || 3000;
-    this.URL = String(process.env.URL) || `http://localhost:${this.PORT}`;
-    this.CLIENT_ID = String(process.env.CLIENT_ID) || "";
-    this.CLIENT_SECRET = String(process.env.CLIENT_SECRET) || "";
-    this.DEFAULT_LOCALE = String(process.env.DEFAULT_LOCALE) || "en_US";
-    this.DEFAULT_REGION = String(process.env.DEFAULT_REGION) || "eu";
-  }
+    private static GetEnv<T>(key: string): T
+    {
+        try
+        {
+            dotenv.config();
+            let value = <unknown>process.env[key];
+            return <T>value;
+        }
+        catch(exception: any)
+        {
+            console.error(exception);
+            throw "oops";
+        }
+    }
 }
-
-export = new Config();

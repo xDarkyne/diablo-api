@@ -3,7 +3,7 @@ import { Cache, CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { stringify } from "querystring";
 import { RequestConfig } from "../models";
-import Config from '../config/config';
+import { Config } from '../config/config';
 import { Endpoints } from "../types";
 
 const tokenCache = new CacheContainer(new MemoryStorage());

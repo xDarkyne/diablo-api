@@ -4,7 +4,7 @@ import { MemoryStorage } from 'node-ts-cache-storage-memory';
 import { URLHandler, RequestBuilder, ErrorHandler } from '../../helpers';
 import { Item } from '../../models';
 import { Endpoints } from '../../types';
-import Config from '../../config/config';
+import { Config } from '../../config/config';
 
 const ItemCache = new CacheContainer(new MemoryStorage());
 
