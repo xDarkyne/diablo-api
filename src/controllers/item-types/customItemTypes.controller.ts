@@ -131,7 +131,7 @@ export abstract class CustomItemTypesController {
       }));
 
       return data;
-    } catch(error) {
+    } catch(error: any) {
       console.error(error);
       throw "Could not retrieve list of all item types.";
     }

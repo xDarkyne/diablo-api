@@ -7,7 +7,8 @@ export class URLHandler {
    * locale, endpoint and slug for easy access trough the API.
    * 
    * @param endpoint 
-   * @param slug 
+   * @param slug
+   * @param locale
    * @param region 
    * @returns ready-to-use URL pointing to an endpoint of this service.
    */
@@ -27,6 +28,6 @@ export class URLHandler {
    * @returns ready-to-use URL pointing to an image from Blizzard's media API.
    */
   public static getMediaURL(endpoint: string, size: string, icon: string): string {
-    return `http://media.blizzard.com/d3/icons/${endpoint}/${String(size)}/${icon}.png`;
+    return `https://media.blizzard.com/d3/icons/${endpoint}/${String(size)}/${icon}.png`;
   }
 }
